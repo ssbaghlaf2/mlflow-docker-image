@@ -1,9 +1,9 @@
-FROM python:3.9.16 AS foundation
+FROM python:3.11 AS foundation
 
 LABEL maintainer="Burak Ince <burak.ince@linux.org.tr>"
 
 WORKDIR /mlflow/
-COPY pyproject.toml poetry.toml poetry.lock /mlflow/
+COPY pyproject.toml poetry.toml /mlflow/
 
 RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split \
     && ln -s /usr/bin/dpkg-deb /usr/sbin/dpkg-deb \
@@ -13,23 +13,23 @@ RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split \
 # Install build-essential to compile extensions.
 RUN apt-get update && \
     apt-get install -y \
-      make \
-      build-essential \
-      libssl-dev \
-      zlib1g-dev \
-      libbz2-dev \
-      libreadline-dev \
-      libsqlite3-dev \
-      wget \
-      curl \
-      llvm-9 \
-      libncursesw5-dev \
-      xz-utils \
-      tk-dev \
-      libxml2-dev \
-      libxmlsec1-dev \
-      libffi-dev \
-      liblzma-dev && \
+    make \
+    build-essential \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    wget \
+    curl \
+    llvm-9 \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    libffi-dev \
+    liblzma-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/bin/llvm-config-9 /usr/bin/llvm-config
@@ -39,7 +39,7 @@ RUN python -m pip install --upgrade pip
 RUN pip install poetry wheel &&  \
     poetry install --no-root --no-dev
 
-FROM python:3.9.16-slim
+FROM python:3.11-slim
 
 WORKDIR /mlflow/
 
