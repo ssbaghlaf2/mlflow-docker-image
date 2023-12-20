@@ -6,7 +6,7 @@ authors = ["Burak Ince <burak.ince@linux.org.tr>"]
 
 [tool.poetry.dependencies]
 python = "3.11.*"
-mlflow = { version = "2.6.0", extras = ["extras", "pipelines"] }
+mlflow = { version = "2.9.2", extras = ["extras", "pipelines"] }
 azure-storage-blob = "^12.11.0"
 google-cloud-storage = "^2.2.1"
 SQLAlchemy = "^1.4.35"
